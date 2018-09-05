@@ -1,0 +1,7 @@
+{
+    "lambda": {
+        "role": "imgresize-executor",
+        "name": "imgresize",
+        "region": "us-east-1"
+    }
+}
