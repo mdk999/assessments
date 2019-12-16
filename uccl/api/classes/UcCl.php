@@ -232,6 +232,8 @@ class UcCl
 
                     $this->updateListingOpts('amount',count($newListings));
 
+                    $this->updateListingOpts('last_modified',$this->metrics['last_modified']);
+
                     return true;
                 }
                 else throw new \Exception('unable to save new listings');
