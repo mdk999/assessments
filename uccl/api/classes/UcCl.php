@@ -232,7 +232,7 @@ class UcCl
 
                     $this->updateListingOpts('amount',count($newListings));
 
-                    $this->updateListingOpts('last_modified',$this->metrics['last_modified']);
+                    $this->updateListingOpts('last_modified',$this->lastModifiedTS);
 
                     return true;
                 }
