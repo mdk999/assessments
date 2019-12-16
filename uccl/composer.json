@@ -1,0 +1,15 @@
+{
+    "name": "mdk999/uc",
+    "description": "assessment by UC",
+    "type": "project",
+    "authors": [{
+        "name": "Michael Wedderburn",
+        "email": "mdk999@gmail.com"
+    }],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Classes\\": "api/classes/"
+        }
+    }
+}

@@ -203,7 +203,7 @@ class TvDb
 
         if(filter_var($id,SANITIZE_NUMBER_INT)){
 
-            $sql = "insert into seriess (`id`,`jwttoken`,`date_added`) values (?,?,NOW()) on duplicate key update date_updated=NOW()";
+            $sql = "insert into series (`id`,`jwttoken`,`date_added`) values (?,?,NOW()) on duplicate key update date_updated=NOW()";
 
             $this->db->prepare($sql)->execute(['1', $resp]);
 
@@ -229,7 +229,7 @@ class TvDb
         
             $sql = "insert into jwt (`id`,`jwttoken`,`date_updated`) values (?,?,NOW()) on duplicate key update date_updated = NOW()";
 
-            $err = $this->db->prepare($sql)->execute(['1', $resp]);
+            $this->db->prepare($sql)->execute(['1', $resp]);
 
             return $this->getDbToken();
         }
@@ -482,7 +482,7 @@ class TvDb
 
                 curl_close($curl);
 
-                throw new \Exception('error occured during curl exec. Additioanl info: ' . var_export($info));
+                throw new \Exception('error occured during curl exec. Additional info: ' . var_export($info));
             }
             curl_close($curl);
 
@@ -522,7 +522,7 @@ class TvDb
 
                 curl_close($curl);
 
-                throw new \Exception('error occured during curl exec. Additioanl info: ' . var_export($info));
+                throw new \Exception('error occured during curl exec. Additional info: ' . var_export($info));
             }
             curl_close($curl);
 
