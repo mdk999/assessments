@@ -34,6 +34,7 @@ import sql/uccl.sql into uccldb
 Create a virtual host that looks like the following
 ```
 
+```
 <VirtualHost *:80>  
   ServerName uc.com    
   ServerAlias www.uc.com    
@@ -44,12 +45,12 @@ Create a virtual host that looks like the following
     Require all granted          
   </Directory>
   Alias /api /uc/api  
- <Directory "/uc/">   
-     Options All        
-     AllowOverride All        
-     Require all granted        
- </Directory>    
-</VirtualHost>
+     <Directory "/uc/">   
+        Options All        
+        AllowOverride All        
+        Require all granted        
+     </Directory>
+ </VirtualHost>
 ```
 **You can use whatever name you like for the ServerName/ServerAlias. You would need to however edit your hostfile to point it to 127.0.0.1  if you're running this locally
 ```
