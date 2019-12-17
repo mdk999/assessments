@@ -50,7 +50,7 @@ Alias /api /uc/api
         Require all granted
     </Directory>
 </VirtualHost>
-
+```
 **You can use whatever name you like for the ServerName/ServerAlias. You would need to however edit your hostfile to point it to 127.0.0.1  if you're running this locally
 ```
 ** if you want to use live data change 'testing' to false in the config.php file
