@@ -126,7 +126,8 @@ class UcCl
 
                 if($xlocation = $xpath->query(".//span[@class='result-hood']",$result)){
 
-                    $location = $xlocation[0]->nodeValue ?? null;
+                    $location = preg_replace('/[\)\(]/','',$xlocation[0]->nodeValue) ?? null; //removed brackets for sorting
+
                 }
 
                 $xpicture = $xpath->query(".//a[contains(@class,'result-image')]",$result);

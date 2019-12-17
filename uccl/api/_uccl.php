@@ -26,6 +26,7 @@ $output = json_encode([
 switch ($action) {
     case 'i': //init and insert listings
         $uccl->updateListings();
+        $output = json_encode('data initialized');
     break;
 
     case 'g': //get listings
