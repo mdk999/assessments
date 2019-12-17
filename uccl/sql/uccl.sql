@@ -16,6 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `aptlistings`
+--
+
+DROP TABLE IF EXISTS `aptlistings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aptlistings` (
+  `alid` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(250) DEFAULT NULL,
+  `url` varchar(250) DEFAULT NULL,
+  `br` varchar(2) DEFAULT NULL,
+  `cost` decimal(10,0) DEFAULT NULL,
+  `location` varchar(250) DEFAULT NULL,
+  `picture` varchar(250) DEFAULT NULL,
+  `added` int(11) DEFAULT NULL,
+  `to-delete` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`alid`,`to-delete`),
+  UNIQUE KEY `id_UNIQUE` (`alid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2161 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aptlistings`
+--
+
+LOCK TABLES `aptlistings` WRITE;
+/*!40000 ALTER TABLE `aptlistings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aptlistings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `aptopts`
 --
 
@@ -38,7 +69,7 @@ CREATE TABLE `aptopts` (
 
 LOCK TABLES `aptopts` WRITE;
 /*!40000 ALTER TABLE `aptopts` DISABLE KEYS */;
-INSERT INTO `aptopts` VALUES (1,'last_modified','1576615257'),(2,'last_checked','1576615432'),(3,'updating','0'),(4,'amount','120');
+INSERT INTO `aptopts` VALUES (1,'last_modified',''),(2,'last_checked',NULL),(3,'updating','0'),(4,'amount','');
 /*!40000 ALTER TABLE `aptopts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-17 13:58:28
+-- Dump completed on 2019-12-17 14:18:59
