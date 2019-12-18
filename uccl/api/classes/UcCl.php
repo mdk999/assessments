@@ -285,7 +285,7 @@ class UcCl
 
             }
             
-            return false; //if we can't even get the opts probably a first run so lets start the process
+            return true; //if we can't even get the opts probably a first run so lets start the process
 
     }
 
