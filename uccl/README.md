@@ -10,13 +10,16 @@ NPM > 11.x
 ```
 PHP > 7.x
 ```
+- Requires modules php-xml, pdo_mysql
+```
 PHP Composer
 ```
 Mysql > 5.x
 ```
 Apache > 2.4
 ```
-
+- Requires module php
+```
 # Installation
 ```
 Unzip files into a folder ie. uc
