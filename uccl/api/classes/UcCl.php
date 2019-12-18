@@ -173,7 +173,7 @@ class UcCl
         if(is_array($listings)){
 
             //flag the previous listings for deletion
-            $sql = "update aptlistings set `to-delete` = '1' where `added` = '{$this->metrics['last_updated']}'";
+            $sql = "update aptlistings set `to-delete` = '1' where `added` = '{$this->metrics['last_checked']}'";
             $this->db->exec($sql);
 
             foreach($listings as $listing){
@@ -277,7 +277,7 @@ class UcCl
 
                 if($this->metrics && $this->metrics['last_modified'] !== $this->lastModifiedTS){
 
-                    return ($this->metrics['updating'] !== '1' && $this->metrics['last_modified'] < ($this->nowTS - ($this->config['check_interval'] * 60))) ? true : false;  
+                    return ($this->metrics['updating'] !== '1' && $this->metrics['last_checked'] < ($this->nowTS - ($this->config['check_interval'] * 60))) ? true : false;  
 
                 }
 
