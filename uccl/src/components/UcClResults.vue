@@ -21,6 +21,8 @@
 
         <th @click="sort('location')">Location</th>
 
+        <th @click="sort('posted')">Posted</th>
+
         <th @click="sort('picture')">Picture</th>
       </tr>
 
@@ -42,6 +44,8 @@
 
         <td>{{listing.location}}</td>
 
+        <td>{{listing.posted| moment}}</td>
+
         <td><img :src="listing.picture" /></td>
 
       </tr>
@@ -60,6 +64,9 @@
 
 <script>
 import _ from 'lodash';
+import moment from 'moment';
+import 'jquery';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default {
   name: 'uccl',
@@ -68,13 +75,17 @@ export default {
 
 return {
 listings: [],
-    currSort:'alid',
-    currSortDir:'asc'
+    currSort:'posted',
+    currSortDir:'desc'
 
 };
 
 },
-
+filters: {
+  moment: function (date) {
+    return moment.unix(date).utc().format('YYYY-MM-DD hh:mm');
+  }
+},
 methods: {
 initListings(){
     this.axios.get('/api/_uccl.php?action=i').then((resp) => {

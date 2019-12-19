@@ -126,8 +126,13 @@ class UcCl
 
                 if($xlocation = $xpath->query(".//span[@class='result-hood']",$result)){
 
-                    $location = preg_replace('/[\)\(]/','',$xlocation[0]->nodeValue) ?? null; //removed brackets for sorting
+                    $location = preg_replace('/[\)\(]/','',$xlocation[0]->nodeValue) ?? null; //removed parans for sorting
 
+                }
+
+                if($xposted = $xpath->query(".//time[@class='result-date']",$result)){
+
+                    $posted = strtotime($xposted[0]->nodeValue) ?? null;
                 }
 
                 $xpicture = $xpath->query(".//a[contains(@class,'result-image')]",$result);
@@ -150,6 +155,7 @@ class UcCl
                     'cost'=>trim(preg_replace('~\D~', '', $xcost[0]->nodeValue) ?? null),
                     'location'=>$location, 
                     'picture'=>$picture,
+                    'posted'=>$posted,
                     'added'=>$this->nowTS
                 );
 
@@ -173,14 +179,14 @@ class UcCl
         if(is_array($listings)){
 
             //flag the previous listings for deletion
-            $sql = "update aptlistings set `to-delete` = '1' where `added` = '{$this->metrics['last_updated']}'";
+            $sql = "update aptlistings set `to-delete` = '1' where `added` = '{$this->metrics['last_checked']}'";
             $this->db->exec($sql);
 
             foreach($listings as $listing){
 
-                $sql = "insert into aptlistings (`title`,`url`,`br`,`cost`,`location`,`picture`,`added`) values (?,?,?,?,?,?,?)";
+                $sql = "insert into aptlistings (`title`,`url`,`br`,`cost`,`location`,`picture`,`posted`,`added`) values (?,?,?,?,?,?,?,?)";
 
-                if(!$this->db->prepare($sql)->execute([$listing['title'],$listing['url'],$listing['br'],$listing['cost'],$listing['location'],$listing['picture'],$listing['added']])){
+                if(!$this->db->prepare($sql)->execute([$listing['title'],$listing['url'],$listing['br'],$listing['cost'],$listing['location'],$listing['picture'],$listing['posted'],$listing['added']])){
 
                     throw new \Exception('Error inserting row'); 
 
@@ -197,7 +203,7 @@ class UcCl
 
     function getListings(){ //if we were doing pagination we'd pass in page number, offset, etc to only get the slice of data we need
 
-        if($stmnt = $this->db->prepare("select * from aptlistings where `to-delete` = '0' order by `alid` asc")){
+        if($stmnt = $this->db->prepare("select * from aptlistings where `to-delete` = '0' order by `posted` desc")){
 
             $stmnt->execute();
 
@@ -215,6 +221,8 @@ class UcCl
     function updateListings(){
 
         $srcHtml = '';
+
+        var_dump($this->shouldUpdateListing());
         
         if($this->shouldUpdateListing()){
         
@@ -277,7 +285,7 @@ class UcCl
 
                 if($this->metrics && $this->metrics['last_modified'] !== $this->lastModifiedTS){
 
-                    return ($this->metrics['updating'] !== '1' && $this->metrics['last_modified'] < ($this->nowTS - ($this->config['check_interval'] * 60))) ? true : false;  
+                    return ($this->metrics['updating'] !== '1' && $this->metrics['last_checked'] < ($this->nowTS - ($this->config['check_interval'] * 60))) ? true : false;  
 
                 }
 
@@ -285,7 +293,7 @@ class UcCl
 
             }
             
-            return false; //if we can't even get the opts probably a first run so lets start the process
+            return true; //if we can't even get the opts probably a first run so lets start the process
 
     }
 
