@@ -1,0 +1,65 @@
+<section class="search-sec">
+  <div class="container">
+    <form action="#" method="post" novalidate="novalidate">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <h2>Student Search</h2>
+            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+              <input type="text" class="form-control search-slt" id="first_name" name="first_name" placeholder="First name" ng-model="searchFirstName">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+              <input type="text" class="form-control search-slt" id="last_name" name="last_name" placeholder="Last name" ng-model="searchLastName">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+              <button type="button" class="btn btn-primary wrn-btn" ng-click="searchStudents()">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <br />
+    <div class="row col-md-8" ng-if="showResults">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Average Grade (GPA)</th>
+          <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="(key,student) in students">
+        <tr>
+          <th scope="row">{{key}}</th>
+          <td>{{student.first}}</td>
+          <td>{{student.last}}</td>
+          <td>{{getGPA(student.studentClasses)}}</td>
+          <td><a class="details" href="javascript:;" ng-click="toggleFilter(key)">details</a></td>
+        </tr>
+        <tr ng-show="toggle[key]">
+          <td colspan="5">
+            <table class="table-condensed">
+              <tbody>
+              <tr><td>First Name: {{student.first}}</td><td>Last Name: {{student.last}}</td></tr>
+              <tr><td>Email: {{student.email}}</td><td>Average Grade (GPA): {{getGPA(student.studentClasses)}}</td></tr>
+              <tr><td colspan="2"><strong>Classes</strong></td></tr>
+              <tr ng-repeat="(ckey, class) in student.studentClasses">
+                <td>{{classes[class.id]}}: {{class.grade}}</td>
+              </tr>
+              </tbody>
+
+          </table>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="row col-md-4" ng-if="showDetails">
+
+    </div>
+  </div>
+</section>
+<section ng-if="showNotFound"> <div class="container">No results</div></section>

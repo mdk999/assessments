@@ -1,0 +1,9 @@
+apps:
+  - script : 'node'
+    args   : 'server.js'
+    cwd    : './backend'
+    name   : 'api'
+  - script : 'node'
+    args   : 'server.js'
+    cwd    : './frontend'
+    name   : 'app'
