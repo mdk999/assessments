@@ -18,5 +18,5 @@ CREATE TABLE `students` (
   `student_class` INT(11) NULL,
   `student_grade` DECIMAL(1,2) NULL,
   PRIMARY KEY (`scid`),
-  CONSTRAINT `sc_to_student` FOREIGN KEY (`student_id`) REFERENCES `parent` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  CONSTRAINT `sc_to_students` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   INDEX `sc_data` (`student_id` ASC, `student_class` ASC));
